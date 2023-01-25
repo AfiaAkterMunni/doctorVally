@@ -84,4 +84,35 @@ class QualificationController extends Controller
         }
 
     }
+
+    public function delete($id)
+    {
+        $qualification = Qualification::find($id);
+        if($qualification)
+        {
+            if(auth()->user()->hasRole('doctor'))
+            {
+                $qualification->delete();
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Qualification deleted successfully!!',
+                    'data' => $qualification
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Unauthorize access!!'
+                ], 401);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'error' => true,
+                'message' => 'Qualification not found'
+            ], 404);
+        }
+    }
 }
