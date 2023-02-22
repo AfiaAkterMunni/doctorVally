@@ -111,7 +111,7 @@ class QualificationController extends Controller
         {
             return response()->json([
                 'error' => true,
-                'message' => 'Qualification not found'
+                'message' => 'Qualification  not found'
             ], 404);
         }
     }
